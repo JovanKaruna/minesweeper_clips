@@ -1,12 +1,17 @@
 class Board:
     '''Class Board contains everything on board game'''
 
-    def __init__(self, config):
+    def __init__(self, config, agent):
         self.board_size = config['board_size']
         self.bomb_size = config['bomb_size']
         self.bomb_locations = config['bomb_locations']
-        self.init_board_element()
 
+        if not agent:
+            self.init_board_element()
+        else:
+            self.board = [['?' for i in range(self.board_size)] for j in range(self.board_size)]
+
+    
     def __str__(self):
         out = ''
         for i in range(self.board_size):
@@ -15,6 +20,9 @@ class Board:
                 out += ' '
             out += '\r\n'
         return out
+    
+    def get_element(self, location):
+        return self.board[location[0]][location[1]]
 
     def is_valid(self, value):
         '''Is value outside board
