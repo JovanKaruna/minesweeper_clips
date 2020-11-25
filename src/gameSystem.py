@@ -1,6 +1,8 @@
 from .board import Board
 from .agent import Agent
 
+import time
+
 class GameSystem:
 
     def __init__(self, config):
@@ -45,8 +47,12 @@ class GameSystem:
 
     def run(self):
         moves = self.agent.decide(self.agent_board.board)
+        print(self.agent_board)
         while len(moves) != 0:
             for move in moves:
+                print(move)
                 self.open_board(move, [])
+                print(self.agent_board)
+                # time.sleep(1)
             moves = self.agent.decide(self.agent_board.board)
         print(self.agent.bombs)
