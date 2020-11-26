@@ -21,6 +21,13 @@ class Board:
             out += '\r\n'
         return out
     
+    def __eq__(self, another):
+        for i in range(self.board_size):
+            for j in range(self.board_size):
+                if self.board[i][j] != another.board[i][j]:
+                    return False
+        return True 
+    
     def get_element(self, location):
         return self.board[location[0]][location[1]]
 
@@ -58,7 +65,7 @@ class Board:
             int: tile element
         '''
         if self.is_bomb(location):
-            return 'B'
+            return '?'
 
         check = {
             'left': (location[0], location[1]-1),

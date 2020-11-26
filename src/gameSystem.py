@@ -66,5 +66,10 @@ class GameSystem:
                 time.sleep(1)
             moves = self.agent.decide(self.agent_board.board)
         print(self.agent.bombs)
+        if self.agent_board == self.goals_board:
+            print('Success')
+        else:
+            print('Failed')
+
         self.GUI.render(self.agent_board)
         self.GUI.render_end_game(self.agent.bombs)
