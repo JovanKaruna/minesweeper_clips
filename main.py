@@ -4,5 +4,8 @@ from src.gameSystem import GameSystem
 
 if __name__ == '__main__':
     config = Reader.config('config.txt')
-    game = GameSystem(config)
-    game.run()
+    try :
+        game = GameSystem(config)
+        game.run()
+    except Exception :
+        print("Exit Program")

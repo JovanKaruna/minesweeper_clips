@@ -1,5 +1,6 @@
 from .board import Board
 from .agent import Agent
+from .GUI import GUI
 
 import time
 
@@ -9,6 +10,12 @@ class GameSystem:
         self.goals_board = Board(config, False)
         self.agent_board = Board(config, True)
         self.agent = Agent()
+        self.GUI = GUI(config['board_size'])
+
+        # Initialize GUI
+        self.GUI.init_game_board()
+        self.GUI.render(self.agent_board)
+        time.sleep(1)
 
         # Initialize First Move Agent (Start at (0,0))
         self.open_board((0,0), [])
@@ -48,11 +55,16 @@ class GameSystem:
     def run(self):
         moves = self.agent.decide(self.agent_board.board)
         print(self.agent_board)
+        self.GUI.render(self.agent_board)
+        time.sleep(1)
         while len(moves) != 0:
             for move in moves:
                 print(move)
                 self.open_board(move, [])
                 print(self.agent_board)
-                # time.sleep(1)
+                self.GUI.render(self.agent_board)
+                time.sleep(1)
             moves = self.agent.decide(self.agent_board.board)
         print(self.agent.bombs)
+        self.GUI.render(self.agent_board)
+        self.GUI.render_end_game(self.agent.bombs)

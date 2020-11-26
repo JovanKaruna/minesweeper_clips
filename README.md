@@ -30,3 +30,9 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
+
+## Note
+if you got this error:
+```ModuleNotFoundError: No module named 'Tkinter'```<br/>
+You might need to install for your specific version, because a virtualenv in python 3.7 may not importing tkinter. You would have to install it for that version specifically.
+```sudo apt-get install python3-tk```
