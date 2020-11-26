@@ -4,3 +4,4 @@ ipython-genutils==0.2.0
 pycparser==2.20
 tornado==6.1
 traitlets==5.0.5
+PySimpleGUI==4.29.0
