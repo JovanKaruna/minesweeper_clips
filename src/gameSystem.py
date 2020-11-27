@@ -67,9 +67,9 @@ class GameSystem:
             moves = self.agent.decide(self.agent_board.board)
         print(self.agent.bombs)
         if self.agent_board == self.goals_board:
-            print('Success')
+            status = 'Success'
         else:
-            print('Failed')
-
+            status = 'Failed'
+        print(status)
         self.GUI.render(self.agent_board)
-        self.GUI.render_end_game(self.agent.bombs)
+        self.GUI.render_end_game(self.agent.bombs, status)

@@ -45,27 +45,29 @@ class GUI:
                     self.window[(i,j)].update("", disabled=True, button_color=("#411f1f", self.generate_button_color(position=(i, j), opened=True)))
                 else:
                     if (agent_board.board[i][j] == 1):
-                        self.window[(i,j)].update(str(agent_board.board[i][j]), disabled=True, button_color=("white", self.generate_button_color(position=(i, j), opened=True)), disabled_button_color=("blue", sg.theme_background_color()))
+                        color = "blue"
                     elif (agent_board.board[i][j] == 2):
-                        self.window[(i,j)].update(str(agent_board.board[i][j]), disabled=True, button_color=("white", self.generate_button_color(position=(i, j), opened=True)), disabled_button_color=("green", sg.theme_background_color()))
+                        color = "green"
                     else : #3
-                        self.window[(i,j)].update(str(agent_board.board[i][j]), disabled=True, button_color=("white", self.generate_button_color(position=(i, j), opened=True)), disabled_button_color=("red", sg.theme_background_color()))
+                        color = "red"
+                    self.window[(i,j)].update(str(agent_board.board[i][j]), disabled=True, button_color=("white", self.generate_button_color(position=(i, j), opened=True)), disabled_button_color=(color, sg.theme_background_color()))
         self.window.read(timeout=10)
         
-    def render_end_game(self, bomb_location):
+    def render_end_game(self, bomb_location, status):
         for (x, y) in bomb_location:
             self.window[(x, y)].update("⚫", disabled=True, button_color=("white", "gray"), disabled_button_color=("black", sg.theme_background_color()))
-        self.render_end_bombloc(bomb_location)
+        self.render_end_bombloc(bomb_location, status)
             
-    def render_end_bombloc(self, bomb_location):
+    def render_end_bombloc(self, bomb_location, status):
         bomb_loc_str = str(bomb_location).strip('[]')
         layout = [
             [sg.T('END GAME', size=(20,1), text_color='#76ba1b', font='Any 20', justification='center')],
+            [sg.T(status, text_color='#76ba1b' if status == 'Success' else '#d5212e', font='Any 16', justification='center')],
             [sg.T('Detected Bomb Location:', justification='center')],
             [sg.T(bomb_loc_str, justification='center')]
         ]
         self.end_window = sg.Window('End Game', layout, element_justification='center', keep_on_top=True, grab_anywhere=True)
-        event, values = self.end_window.read()          
+        event, _ = self.end_window.read()
         if event == sg.WIN_CLOSED:
             self.end_window.close()
         

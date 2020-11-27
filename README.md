@@ -28,8 +28,9 @@ pip install -r requirements.txt
 ```
 2. Run
 ```
-python main.py
+python main.py [CONFIG]
 ```
+CONFIG is config file that located in config folder
 
 ## Note
 if you got this error:
