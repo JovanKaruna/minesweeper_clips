@@ -22,7 +22,7 @@ class GUI:
     def init_layout(self):
         if self.board_window is None: 
             return 
-        self.layout = [[sg.Text("💣",  font=("Helvetica", 20)), sg.Text('Mine Sweeper', text_color='#76ba1b', font=("Helvetica", 24)), sg.Text("💣",  font=("Helvetica", 20))],
+        self.layout = [[sg.Text("⚫",  font=("Helvetica", 20)), sg.Text('Mine Sweeper', text_color='#76ba1b', font=("Helvetica", 24)), sg.Text("⚫",  font=("Helvetica", 20))],
             [sg.Column(self.board_window)]]
 
     def generate_button_color(self, position, opened=False):
@@ -55,7 +55,7 @@ class GUI:
         
     def render_end_game(self, bomb_location, status):
         for (x, y) in bomb_location:
-            self.window[(x, y)].update("💣", disabled=True, button_color=("white", "gray"), disabled_button_color=("black", sg.theme_background_color()))
+            self.window[(x, y)].update("⚫", disabled=True, button_color=("white", "gray"), disabled_button_color=("black", sg.theme_background_color()))
         self.render_end_bombloc(bomb_location, status)
             
     def render_end_bombloc(self, bomb_location, status):
